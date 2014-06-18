@@ -1,0 +1,61 @@
+manual is under creative commons - will be released in july
+-
+CANbus is an unfiltered network
+-
+ODB to CAN is like SMPT to TCP
+-
+ECU and ODB have flashing options
+-
+Test benches can be built to test without car present
+-
+parts: ECU, wiring diagram
+optional: instrument cluster, ignition
+-
+trick crank senor into thinking it's made a rotation.
+this will trick the system into starting.
+-
+see pic for ODB connector:
+Green: CAN signals
+power: 12v
+Make sure car is running if pulling power.
+Puling power here can kill the car in ~20min
+-
+CAN is twisted pair
+CAN uses 2.5V
++-1v to signal
+120 ohm
+-
+Make sure baud is correct when connecting
+-
+see pic for CAN packet diagram (different per vendor)
+-
+CANiBUS: CAN sniffing tool
+-
+optional- pull fuses that you aren't using to keep traffic levels down
+-
+some cars will "phone home" to manufacturer
+-
+IC simulator
+https://github.com/zombieCraig/ICSim
+####################################
+#Follow all instructions on github page
+####################################
+-
+to find can signals:
+Start up ICSim/icsim
+Then start ICSim/controls
+
+Start cansniffer vcan0
+Hit some controls and watch cansniffer
+
+New things will show up and add a row to cansniffer
+After that new thing hasn't been seen for a while it will
+ be removed
+When found, turn off controller to quite any extra noise.
+While watching icsim, use cansend to resend the packet.
+
+Examples:
+Acceleration packet:
+198000 244  00 00 00 A3 00      ........
+Acceleration command:
+cansend vcan0 224#000000A300
